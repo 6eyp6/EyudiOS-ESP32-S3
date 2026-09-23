@@ -48,7 +48,7 @@
 
 ---
 
-## ⚡ Web Üzerinden Tek Tıkla Kurulum ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
+## ⚡ Hızlı Kurulum ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
 
 PlatformIO veya kod derleme ile uğraşmadan EyudiOS'u yüklemek isterseniz:
 1. [EyudiOS Flasher Reposunu](https://github.com/6eyp6/EyudiOS-Flasher) ziyaret edin.
