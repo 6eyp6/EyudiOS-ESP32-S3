@@ -100,7 +100,7 @@ Bu yapı sayesinde bağımsız veya private modüller `registerExternalApps()` z
 
 ---
 
-## ⚡ Yükleme Aracı ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
+## ⚡ Yazılım Yükleme Aracı ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
 
 Hazır derlenmiş ikili dosyaları ve sistem bölümlerini web ortamından tek tıkla ESP32-S3 kartlarına yüklemek için geliştirilen açık kaynaklı python tabanlı yükleme aracıdır.
 
