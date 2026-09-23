@@ -17,7 +17,7 @@
 
 **EyudiOS ESP32-S3 Edition v2.0** is an open-source advanced operating system kernel created by **Eyüp SAĞLAM (Eyudio)**. Designed to run on the ESP32-S3 microcontroller, it features dual-core FreeRTOS task scheduling, direct 400x300 VGA display output, multi-layer input drivers, the `EsDOS` command shell, the `EyuScript Turbo v3` scripting engine, and a modular application registry (`AppRegistry`).
 
-> ⚡ **Fast Installation without Compiling:** You can flash pre-compiled EyudiOS firmware binaries directly from your web browser using the official [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) tool!
+> ⚡ **Fast Installation without Compiling:** You can flash pre-compiled EyudiOS firmware binaries using the official [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) tool!
 
 ---
 
