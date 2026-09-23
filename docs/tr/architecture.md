@@ -3,7 +3,7 @@
 [![Lang Türkçe](https://img.shields.io/badge/Lang-T%C3%BCrk%C3%A7e-red.svg)](architecture.md)
 [![Lang English](https://img.shields.io/badge/Lang-English-blue.svg)](../architecture.md)
 
-> EyudiOS S3 Edition v2.0 — Çekirdek (Kernel), Bellek (PSRAM), Task Yönetimi ve Donanım Sürücüleri
+> EyudiOS S3 Edition v2.0 — Çekirdek (Kernel), Girdi (Input) Mimarisi, Bellek (PSRAM) ve Task Yönetimi
 
 ---
 
@@ -15,7 +15,8 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 ┌─────────────────────────────────── Core 1 (UI & System) ───────────────────────┐
 │                                                                                │
 │   loop() — Ana UI Döngüsü                              Priority: 1             │
-│   ├── processUSBInput()          → USB Klavye & Fare olayları (CH375)          │
+│   ├── processUSBInput()          → USB Klavye & Fare olayları (CH375/Native)   │
+│   ├── processBLEInput()          → NimBLE Gamepad & Kablosuz Klavye okuma       │
 │   ├── IPC mesaj işle             → Arka plandan gelen Queue (16 slot) paketleri  │
 │   └── Render (systemMutex korumalı)                                            │
 │       ├── runningScript → ESC overlay ve ön plan ScriptEngine çizimi           │
@@ -45,6 +46,25 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 
 ---
 
+## ⌨️ Çok Katmanlı Girdi (Input) Sürücü Mimarisi
+
+EyudiOS v2.0 donanım ve yazılım seviyesinde 6 farklı girdi katmanını destekler:
+
+1. **Yerleşik ESP32-S3 USB OTG Host Sürücüsü:**
+   - ESP32-S3 çipinin dahili USB D+/D- pinleri üzerinden doğrudan USB HID Klavye (8-byte rapor) ve USB HID Fare (delta X/Y, sol/sağ tık) desteği.
+2. **CH375 Donanımsal USB Sürücüsü (UART):**
+   - İkincil coprocessor olarak çalışan CH375 modülü üzerinden seri iletişimle (GPIO 3 RX / GPIO 46 TX) donanımsal klavye ve fare desteği.
+3. **NimBLE Bluetooth / BLE Oyun Kolu & Klavye Sürücüsü:**
+   - NimBLE-Arduino kütüphanesi ile kablosuz Bluetooth Gamepad, Oyun Kolları ve Kablosuz Klavyelerden gelen tuş girdilerini işleme.
+4. **Leonardo / PSX Controller Sürücüsü:**
+   - Harici Leonardo ve PSX gamepad sürücü entegrasyonu.
+5. **Grafik Sanal Ekran Klavyesi (VKB):**
+   - Ekran üzerinde fare ve dokunmatik ile kullanılabilen grafik klavye.
+6. **GPIO Kesme (ISR) Köprüsü:**
+   - Donanımsal kesme butonları için FreeRTOS `vTaskNotifyGiveFromISR` destekli GPIO kesme fonksiyonları.
+
+---
+
 ## 🧠 Bellek ve RAM Yönetimi (OPI PSRAM Entegrasyonu)
 
 EyudiOS v2.0, 8MB / 16MB OPI PSRAM entegrasyonu sayesinde RAM kıtlığını ortadan kaldırır:
@@ -64,7 +84,7 @@ EyudiOS v2.0, 8MB / 16MB OPI PSRAM entegrasyonu sayesinde RAM kıtlığını ort
 |:---|:---|:---|:---|
 | **Framebuffer / Ekran** | `systemMutex` | Recursive Mutex | UI döngüsü ile ön plan scriptlerinin eş zamanlı ekran çizimini serialize eder. |
 | **SD Kart (EyuFS)** | `sdMutex` | Binary Semaphore | Ön plan script, arka plan task ve EsDOS dosya erişimlerini çakışmalara karşı korur. |
-| **USB Host Buffer** | `systemMutex` | Mutex | CH375 USB sürücüsü klavye/fare tampon belleği koruması. |
+| **USB Host Buffer** | `systemMutex` | Mutex | CH375 ve Native USB sürücüsü klavye/fare tampon belleği koruması. |
 | **IPC Mesaj Kuyruğu** | `ipcQueue` | FreeRTOS Queue (16 slot) | Arka plandan ön plana tek yönlü non-blocking `xQueueSend` ile haberleşme sağlar. |
 
 ---
@@ -88,7 +108,7 @@ Bu yapı sayesinde bağımsız veya private modüller `registerExternalApps()` z
 
 ---
 
-## ⚖️ Lisansleme Güvencesi (GPL-3.0 with Linking Exception)
+## ⚖️ Lisanslama ve Yasal Haklar (GPL-3.0 with Linking Exception)
 
-EyudiOS v2.0 çekirdeği **GPL-3.0 ile Birlikte Özel Bağlama İstisnası (Additional Linking Exception)** taşır.
-Bu şerh sayesinde, EyudiOS çekirdeği üzerine yazılan veya bağlanan özel (proprietary) modüller kodlarını açıklamak zorunda olmadan güvenle dağıtılabilir.
+EyudiOS v2.0 çekirdeği **GPL-3.0 ile Birlikte Özel Bağlama İstisnası (Additional Linking Exception)** lisans koşullarına sahiptir.
+Bu istisna sayesinde, EyudiOS çekirdeği üzerine yazılan veya bağlanan özel (proprietary) modüller kaynak kodlarını açıklamak zorunda olmadan güvenle dağıtılabilir.

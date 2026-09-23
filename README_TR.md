@@ -14,13 +14,20 @@
 
 </div>
 
-**EyudiOS ESP32-S3 Edition v2.0**, **Eyüp SAĞLAM (Eyudio)** tarafından geliştirilmiş, ESP32-S3 mikrodenetleyicisi üzerinde çalışmak üzere tasarlanmış, çift çekirdek FreeRTOS task yönetimi, doğrudan 400x300 VGA ekran çıktısı, USB Klavye/Fare sürücüleri, `EsDOS` komut satırı kabuğu, `EyuScript Turbo v3` betik dili motoru ve modüler uygulama kayıt yapısına (`AppRegistry`) sahip açık kaynaklı gelişmiş bir işletim sistemi çekirdeğidir.
+**EyudiOS ESP32-S3 Edition v2.0**, **Eyüp SAĞLAM (Eyudio)** tarafından geliştirilmiş, ESP32-S3 mikrodenetleyicisi üzerinde çalışmak üzere tasarlanmış, çift çekirdek FreeRTOS task yönetimi, doğrudan 400x300 VGA ekran çıktısı, çok katmanlı girdi sürücüleri (Yerleşik USB OTG Host, CH375 UART USB Host, NimBLE BLE Gamepad/Klavye, Sanal Ekran Klavyesi), `EsDOS` komut satırı kabuğu, `EyuScript Turbo v3` betik dili motoru ve modüler uygulama kayıt yapısına (`AppRegistry`) sahip açık kaynaklı gelişmiş bir işletim sistemi çekirdeğidir.
 
 ---
 
 ## 🌟 Öne Çıkan Özellikler (v2.0)
 
 - 🖥️ **VGA & Ekran Sürücüsü:** Bitluni VGA kütüphanesi entegrasyonu ile 400x300 çözünürlükte double-buffered grafik arayüzü.
+- ⌨️ **Çok Katmanlı Girdi (Input) Mimarisi:**
+  - **Yerleşik ESP32-S3 USB OTG Host:** Doğrudan USB HID Klavye ve Fare desteği.
+  - **CH375 Donanımsal USB Sürücüsü:** İkincil UART USB Host arabirimi (GPIO 3 RX / GPIO 46 TX).
+  - **NimBLE Bluetooth/BLE Motoru:** Kablosuz Bluetooth Gamepad, Oyun Kolu ve Klavye sürücü desteği.
+  - **PSX Oyun Kolu Sürücüsü:** Harici Leonardo / PSX Controller desteği.
+  - **Grafik Sanal Ekran Klavyesi (VKB):** Fare ve dokunmatik uyumlu grafik ekran klavyesi.
+  - **GPIO Kesme (ISR) Köprüsü:** Donanımsal kesme buton yönetimi.
 - ⚡ **Çift Çekirdek Concurrency (FreeRTOS):**
   - **Core 1:** Ön plan UI, pencereler, masaüstü çizim döngüsü ve ön plan betik yürütme.
   - **Core 0:** Arka plan betik iş parçacıkları (`bgScriptTask[0..2]`), FreeRTOS IPC mesaj kuyruğu ve non-blocking I/O.
@@ -44,7 +51,10 @@
 ### Donanım:
 * **MCU:** ESP32-S3 (YD-ESP32-S3 / ESP32-S3-DevKitC-1)
 * **RAM/Flash:** Minimum 8MB / 16MB OPI PSRAM + 16MB Flash
-* **Girdi:** CH375 USB Host Modülü (USB Klavye ve Fare)
+* **Girdi Cihazları:**
+  - USB HID Klavye ve Fare (Yerleşik USB D+/D- veya CH375 Modülü)
+  - Bluetooth BLE Oyun Kolu / Kablosuz Klavye
+  - PSX Controller (Leonardo Sürücüsü)
 * **Depolama:** MicroSD Kart Modülü (SPI Modu)
 
 ### Pin Haritası (`SystemConfig.h`):
@@ -84,7 +94,7 @@
 
 Dil Seçimi: 🇹🇷 **Türkçe** | 🇬🇧 [English](README.md)
 
-- 📖 [docs/tr/architecture.md](docs/tr/architecture.md) ([EN](docs/architecture.md)) — Çekirdek Mimarisi & Concurrency.
+- 📖 [docs/tr/architecture.md](docs/tr/architecture.md) ([EN](docs/architecture.md)) — Çekirdek Mimarisi & Girdi Sürücüleri.
 - 🐚 [docs/tr/esdos_reference.md](docs/tr/esdos_reference.md) ([EN](docs/esdos_reference.md)) — EsDOS Kabuk Referansı.
 - 📜 [docs/tr/eyuscript_reference.md](docs/tr/eyuscript_reference.md) ([EN](docs/eyuscript_reference.md)) — EyuScript Dil Kılavuzu.
 - ⚡ [docs/tr/eyuscript_turbo_v3.md](docs/tr/eyuscript_turbo_v3.md) ([EN](docs/eyuscript_turbo_v3.md)) — EyuScript Turbo v3 & IPC Motoru.
