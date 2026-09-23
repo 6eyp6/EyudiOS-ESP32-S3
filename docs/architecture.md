@@ -49,20 +49,11 @@ EyudiOS v2.0 optimizes the ESP32-S3 dual-core (Xtensa LX7 @ 240MHz) hardware arc
 
 ## ⌨️ Multi-Source Input Driver Architecture
 
-EyudiOS v2.0 supports 6 distinct hardware & software input layers:
-
-1. **Native ESP32-S3 USB OTG Host Driver:**
-   - Direct USB HID Keyboard (8-byte reports) & USB HID Mouse (delta X/Y, clicks) via ESP32-S3 USB D+/D- pins.
-2. **CH375 / USB Host Shield 2.0 Hardware USB Driver (UART):**
-   - Hardware keyboard & mouse support via secondary coprocessor (Arduino Leonardo / Uno) over serial (GPIO 3 RX / GPIO 46 TX).
-3. **NimBLE Bluetooth / BLE Gamepad & Controller Driver:**
-   - Wireless Bluetooth Gamepad, Controllers, and Keyboard support via NimBLE-Arduino.
-4. **PlayStation 2/3/4, Xbox Controllers & External BT Dongle Support:**
-   - Complete game controller and Bluetooth device support via USB Host Shield 2.0 and Arduino Leonardo / Uno coprocessor combination.
-5. **Graphical Virtual Keyboard (VKB):**
-   - Interactive on-screen mouse/touch driven keyboard.
-6. **GPIO Interrupt (ISR) Bridge:**
-   - FreeRTOS `vTaskNotifyGiveFromISR` supported hardware button interrupt handling.
+1. **Native ESP32-S3 USB OTG Host:** Direct USB HID Keyboard & Mouse support via USB D+/D- pins.
+2. **CH375 / Coprocessor USB Host (UART):** Hardware Keyboard, Mouse, PS2/3/4 & Xbox controller support via Arduino coprocessor (GPIO 3/46).
+3. **NimBLE Bluetooth (BLE):** Wireless BT Gamepad and keyboard input support.
+4. **Graphical Virtual Keyboard (VKB):** On-screen mouse/touch driven keyboard.
+5. **GPIO ISR Bridge:** `vTaskNotifyGiveFromISR` supported hardware button interrupt handling.
 
 ---
 

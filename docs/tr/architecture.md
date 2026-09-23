@@ -49,20 +49,11 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 
 ## ⌨️ Çok Katmanlı Girdi (Input) Sürücü Mimarisi
 
-EyudiOS v2.0 donanım ve yazılım seviyesinde 6 farklı girdi katmanını destekler:
-
-1. **Yerleşik ESP32-S3 USB OTG Host Sürücüsü:**
-   - ESP32-S3 çipinin dahili USB D+/D- pinleri üzerinden doğrudan USB HID Klavye (8-byte rapor) ve USB HID Fare (delta X/Y, sol/sağ tık) desteği.
-2. **CH375 / USB Host Shield 2.0 Donanımsal USB Sürücüsü (UART):**
-   - İkincil coprocessor olarak çalışan Arduino Leonardo / Uno üzerinden seri iletişimle (GPIO 3 RX / GPIO 46 TX) donanımsal klavye ve fare desteği.
-3. **NimBLE Bluetooth / BLE Oyun Kolu & Klavye Sürücüsü:**
-   - NimBLE-Arduino kütüphanesi ile kablosuz Bluetooth Gamepad, Oyun Kolları ve Kablosuz Klavyelerden gelen tuş girdilerini işleme.
-4. **PlayStation 2/3/4, Xbox kumandaları ve harici Bluetooth USB sürücüsü desteği:**
-   - USB Host Shield 2.0 ve Arduino Leonardo / Uno ikilisiyle tüm oyun kollarına ve bluetooth cihazlarına destek.
-5. **Grafik Sanal Ekran Klavyesi (VKB):**
-   - Ekran üzerinde fare ve dokunmatik ile kullanılabilen grafik klavye.
-6. **GPIO Kesme (ISR) Köprüsü:**
-   - Donanımsal kesme butonları için FreeRTOS `vTaskNotifyGiveFromISR` destekli GPIO kesme fonksiyonları.
+1. **Yerleşik ESP32-S3 USB OTG Host:** USB D+/D- pinleri üzerinden doğrudan HID Klavye & Fare desteği.
+2. **CH375 / Coprocessor USB Host (UART):** Arduino (Leonardo/Uno) coprocessor üzerinden (GPIO 3/46) donanımsal klavye, fare, PS2/3/4 ve Xbox kumanda desteği.
+3. **NimBLE Bluetooth (BLE):** Kablosuz BT Gamepad ve klavye desteği.
+4. **Sanal Ekran Klavyesi (VKB):** Fare/dokunmatik destekli grafik klavye.
+5. **GPIO ISR Köprüsü:** Donanımsal kesme butonları için `vTaskNotifyGiveFromISR` desteği.
 
 ---
 
