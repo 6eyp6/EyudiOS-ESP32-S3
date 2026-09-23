@@ -15,7 +15,7 @@
 
 </div>
 
-**EyudiOS ESP32-S3 Edition v2.0**, **Eyüp SAĞLAM (Eyudio)** tarafından geliştirilmiş, ESP32-S3 mikrodenetleyicisi üzerinde çalışmak üzere tasarlanmış, çift çekirdek FreeRTOS task yönetimi, doğrudan 400x300 VGA ekran çıktısı, çok katmanlı girdi sürücüleri (Yerleşik USB OTG Host, CH375 / USB Host Shield 2.0, NimBLE BLE Gamepad, PlayStation & Xbox Kumandaları, Sanal Ekran Klavyesi), `EsDOS` komut satırı kabuğu, `EyuScript Turbo v3` betik dili motoru ve modüler uygulama kayıt yapısına (`AppRegistry`) sahip açık kaynaklı gelişmiş bir işletim sistemi çekirdeğidir.
+**EyudiOS ESP32-S3 Edition v2.0**, **Eyüp SAĞLAM (Eyudio)** tarafından geliştirilmiş, ESP32-S3 mikrodenetleyicisi üzerinde çalışmak üzere tasarlanmış, çift çekirdek FreeRTOS task yönetimi, doğrudan 400x300 VGA ekran çıktısı, çok katmanlı girdi sürücüleri, `EsDOS` komut satırı kabuğu, `EyuScript Turbo v3` betik dili motoru ve modüler uygulama kayıt yapısına (`AppRegistry`) sahip açık kaynaklı gelişmiş bir işletim sistemi çekirdeğidir.
 
 > ⚡ **Kod Derlemeden Hızlı Kurulum:** EyudiOS'u bilgisayarınızda PlatformIO derleme ortamı kurmadan doğrudan tarayıcı üzerinden ESP32-S3 kartınıza yüklemek için resmi [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) aracını kullanabilirsiniz!
 
@@ -25,12 +25,11 @@
 
 - 🖥️ **VGA & Ekran Sürücüsü:** Bitluni VGA kütüphanesi entegrasyonu ile 400x300 çözünürlükte double-buffered grafik arayüzü.
 - ⌨️ **Çok Katmanlı Girdi (Input) Mimarisi:**
-  - **Yerleşik ESP32-S3 USB OTG Host Sürücüsü:** ESP32-S3 çipinin dahili USB D+/D- pinleri üzerinden doğrudan USB HID Klavye (8-byte rapor) ve USB HID Fare (delta X/Y, sol/sağ tık) desteği.
-  - **CH375 / USB Host Shield 2.0 Donanımsal USB Sürücüsü (UART):** İkincil coprocessor olarak çalışan Arduino Leonardo / Uno üzerinden seri iletişimle (GPIO 3 RX / GPIO 46 TX) donanımsal klavye ve fare desteği.
-  - **NimBLE Bluetooth / BLE Oyun Kolu & Klavye Sürücüsü:** NimBLE-Arduino kütüphanesi ile kablosuz Bluetooth Gamepad, Oyun Kolları ve Kablosuz Klavyelerden gelen tuş girdilerini işleme.
-  - **PlayStation 2/3/4, Xbox kumandaları ve harici Bluetooth USB sürücüsü desteği:** USB Host Shield 2.0 ve Arduino Leonardo / Uno ikilisiyle tüm oyun kollarına ve bluetooth cihazlarına destek.
-  - **Grafik Sanal Ekran Klavyesi (VKB):** Ekran üzerinde fare ve dokunmatik ile kullanılabilen grafik klavye.
-  - **GPIO Kesme (ISR) Köprüsü:** Donanımsal kesme butonları için FreeRTOS `vTaskNotifyGiveFromISR` destekli GPIO kesme fonksiyonları.
+  - **Yerleşik USB OTG Host:** USB D+/D- pinlerinden doğrudan HID Klavye & Fare.
+  - **CH375 / Coprocessor USB Host (UART):** Arduino (Leonardo/Uno) coprocessor üzerinden klavye, fare, PS2/3/4 ve Xbox kumanda desteği.
+  - **NimBLE Bluetooth (BLE):** Kablosuz BLE Gamepad ve klavye desteği.
+  - **Grafik Sanal Ekran Klavyesi (VKB):** Fare/dokunmatik destekli ekran klavyesi.
+  - **GPIO ISR Köprüsü:** FreeRTOS ISR donanımsal kesme butonları.
 - ⚡ **Çift Çekirdek Concurrency (FreeRTOS):**
   - **Core 1:** Ön plan UI, pencereler, masaüstü çizim döngüsü ve ön plan betik yürütme.
   - **Core 0:** Arka plan betik iş parçacıkları (`bgScriptTask[0..2]`), FreeRTOS IPC mesaj kuyruğu ve non-blocking I/O.

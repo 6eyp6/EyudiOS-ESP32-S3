@@ -15,7 +15,7 @@
 
 </div>
 
-**EyudiOS ESP32-S3 Edition v2.0** is a high-performance open-source operating system kernel and runtime environment created by **Eyüp SAĞLAM (Eyudio)**. It features dual-core FreeRTOS task scheduling, direct 400x300 VGA display output, multi-source input drivers (Native USB OTG Host, CH375 / USB Host Shield 2.0, NimBLE BLE Gamepads, PlayStation & Xbox Controllers, Virtual Keyboard), the `EsDOS` command shell, the `EyuScript Turbo v3` scripting engine, and a clean modular application registry (`AppRegistry`).
+**EyudiOS ESP32-S3 Edition v2.0** is an open-source advanced operating system kernel created by **Eyüp SAĞLAM (Eyudio)**. Designed to run on the ESP32-S3 microcontroller, it features dual-core FreeRTOS task scheduling, direct 400x300 VGA display output, multi-layer input drivers, the `EsDOS` command shell, the `EyuScript Turbo v3` scripting engine, and a modular application registry (`AppRegistry`).
 
 > ⚡ **Fast Installation without Compiling:** You can flash pre-compiled EyudiOS firmware binaries directly from your web browser using the official [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) tool!
 
@@ -24,13 +24,12 @@
 ## 🌟 Key Features (v2.0)
 
 - 🖥️ **VGA & Display Engine:** Bitluni VGA integration providing 400x300 double-buffered graphics interface.
-- ⌨️ **Multi-Source Input Architecture:**
-  - **Native ESP32-S3 USB OTG Host Driver:** Direct USB HID Keyboard (8-byte report) & USB HID Mouse (delta X/Y, clicks) via ESP32-S3 D+/D- pins.
-  - **CH375 / USB Host Shield 2.0 Hardware USB Driver (UART):** Hardware keyboard & mouse support via secondary coprocessor (Arduino Leonardo / Uno) over serial (GPIO 3 RX / GPIO 46 TX).
-  - **NimBLE Bluetooth / BLE Gamepad & Controller Driver:** Wireless Bluetooth Gamepad, Controllers, and Keyboard support via NimBLE-Arduino.
-  - **PlayStation 2/3/4, Xbox Controllers & External BT Dongle Support:** Complete game controller and Bluetooth device support via USB Host Shield 2.0 and Arduino Leonardo / Uno coprocessor combination.
-  - **Graphical Virtual Keyboard (VKB):** Interactive on-screen mouse/touch driven keyboard.
-  - **GPIO Interrupt (ISR) Bridge:** Hardware button interrupt handling with FreeRTOS `vTaskNotifyGiveFromISR`.
+- ⌨️ **Multi-Layer Input Architecture:**
+  - **Native USB OTG Host:** Direct USB HID Keyboard & Mouse via USB D+/D- pins.
+  - **CH375 / Coprocessor USB Host (UART):** Hardware Keyboard, Mouse, PS2/3/4 & Xbox controller support via Arduino coprocessor (GPIO 3/46).
+  - **NimBLE Bluetooth (BLE):** Wireless BLE Gamepads and keyboard input.
+  - **Graphical Virtual Keyboard (VKB):** On-screen mouse/touch driven interactive keyboard.
+  - **GPIO ISR Bridge:** FreeRTOS ISR hardware button handling.
 - ⚡ **Dual-Core Concurrency (FreeRTOS):**
   - **Core 1:** Foreground UI, windowing system, desktop render loop, and foreground script execution.
   - **Core 0:** Background script tasks (`bgScriptTask[0..2]`), FreeRTOS IPC message queues, and non-blocking I/O.
