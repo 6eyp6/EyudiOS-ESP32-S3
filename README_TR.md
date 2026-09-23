@@ -17,7 +17,7 @@
 
 **EyudiOS ESP32-S3 Edition v2.0**, **Eyüp SAĞLAM (Eyudio)** tarafından geliştirilmiş, ESP32-S3 mikrodenetleyicisi üzerinde çalışmak üzere tasarlanmış, çift çekirdek FreeRTOS task yönetimi, doğrudan 400x300 VGA ekran çıktısı, çok katmanlı girdi sürücüleri, `EsDOS` komut satırı kabuğu, `EyuScript Turbo v3` betik dili motoru ve modüler uygulama kayıt yapısına (`AppRegistry`) sahip açık kaynaklı gelişmiş bir işletim sistemi çekirdeğidir.
 
-> ⚡ **Kod Derlemeden Hızlı Kurulum:** EyudiOS'u bilgisayarınızda PlatformIO derleme ortamı kurmadan doğrudan tarayıcı üzerinden ESP32-S3 kartınıza yüklemek için resmi [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) aracını kullanabilirsiniz!
+> ⚡ **Kod Derlemeden Hızlı Kurulum:** EyudiOS'u bilgisayarınızda PlatformIO derleme ortamı kurmadan ESP32-S3 kartınıza yüklemek için resmi [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) aracını kullanabilirsiniz!
 
 ---
 
