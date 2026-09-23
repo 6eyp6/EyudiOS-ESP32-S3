@@ -55,6 +55,17 @@ EyudiOS v2.0 optimizes the ESP32-S3 dual-core (Xtensa LX7 @ 240MHz) hardware arc
 4. **Graphical Virtual Keyboard (VKB):** On-screen mouse/touch driven keyboard.
 5. **GPIO ISR Bridge:** `vTaskNotifyGiveFromISR` supported hardware button interrupt handling.
 
+### 🕹️ Arduino Leonardo Coprocessor Setup & Protocol
+
+EyudiOS v2.0 utilizes an Arduino Leonardo (ATmega32u4) as a secondary coprocessor to offload USB Host Shield operations for external gamepads (PS2/PS3/PS4/Xbox) and Bluetooth dongles:
+
+* **Driver Sketches:**
+  - `leonardo_drivers/usb psx/usb_controller_driver/usb_controller_driver.ino` (Wired USB & PS2 controllers)
+  - `leonardo_drivers/bluetooth/bluetooth_dongle_driver.ino` (Wireless controllers via USB Bluetooth Dongle)
+* **Memory Optimization:** Due to Leonardo's 28KB flash limit, toggle compile flags `#define SUPPORT_PS4` or `#define SUPPORT_PS2` in the `.ino` file to enable only active controllers.
+* **Handshake & UART Protocol:** Upon startup, Leonardo sends `SYS,DRV:...` over UART. Once ESP32-S3 returns `SYS,ACK`, onboard LED turns ON and 2-player button (`P1,PRESS:X`) / analog (`P1,ANALOG:...`) events stream at 115200 Baud.
+* **Pin Connections:** Leonardo RX:8 $\rightarrow$ ESP32-S3 GPIO 46 (TX), Leonardo TX:7 $\rightarrow$ ESP32-S3 GPIO 3 (RX).
+
 ---
 
 ## 🧠 Memory & RAM Management (OPI PSRAM Integration)

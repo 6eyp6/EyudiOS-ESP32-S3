@@ -55,6 +55,17 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 4. **Sanal Ekran Klavyesi (VKB):** Fare/dokunmatik destekli grafik klavye.
 5. **GPIO ISR Köprüsü:** Donanımsal kesme butonları için `vTaskNotifyGiveFromISR` desteği.
 
+### 🕹️ Arduino Leonardo Coprocessor Kurulum & Haberleşme Mimarisi
+
+EyudiOS v2.0, harici USB cihazları (PS2/PS3/PS4/Xbox kumandaları ve Bluetooth Dongle) yönetmek için Arduino Leonardo (ATmega32u4) işlemcisini yardımcı sürücü olarak kullanır:
+
+* **Sürücü Sketch'leri:**
+  - `leonardo_drivers/usb psx/usb_controller_driver/usb_controller_driver.ino` (Kablolu USB & PS2 kollar)
+  - `leonardo_drivers/bluetooth/bluetooth_dongle_driver.ino` (USB Bluetooth Dongle ile kablosuz kollar)
+* **Bellek Optimizasyonu:** Leonardo'nun 28KB kısıtlı hafızası nedeniyle `.ino` içindeki `#define SUPPORT_PS4`, `#define SUPPORT_PS2` bayrakları ile sadece kullanılan kollar aktifleştirilir.
+* **El Sıkışma (Handshake) & UART:** Leonardo açıldığında ESP32-S3'e `SYS,DRV:...` sinyali gönderir. ESP32-S3'ten `SYS,ACK` yanıtı geldiğinde LED sabiten yanar ve 2 oyuncu için buton (`P1,PRESS:X`) / analog (`P1,ANALOG:...`) verileri 115200 Baud hızında aktarılmaya başlar.
+* **Bağlantı:** Leonardo RX:8 $\rightarrow$ ESP32-S3 GPIO 46 (TX), Leonardo TX:7 $\rightarrow$ ESP32-S3 GPIO 3 (RX).
+
 ---
 
 ## 🧠 Bellek ve RAM Yönetimi (OPI PSRAM Entegrasyonu)
