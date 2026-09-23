@@ -6,6 +6,7 @@
 
 [![Lang English](https://img.shields.io/badge/Lang-English-blue.svg)](README.md)
 [![Lang Türkçe](https://img.shields.io/badge/Lang-T%C3%BCrk%C3%A7e-red.svg)](README_TR.md)
+[![EyudiOS Flasher](https://img.shields.io/badge/Web%20Flasher-EyudiOS%20Flasher-purple.svg)](https://github.com/6eyp6/EyudiOS-Flasher)
 [![License: GPL v3 with Linking Exception](https://img.shields.io/badge/License-GPLv3%20with%20Linking%20Exception-green.svg)](LICENSE)
 [![PlatformIO](https://img.shields.io/badge/PlatformIO-ESP32--S3-orange.svg)](https://platformio.org/)
 [![Framework](https://img.shields.io/badge/Framework-Arduino%20%2F%20FreeRTOS-teal.svg)](https://www.espressif.com/)
@@ -14,7 +15,9 @@
 
 </div>
 
-**EyudiOS ESP32-S3 Edition v2.0** is a high-performance open-source operating system kernel and runtime environment created by **Eyüp SAĞLAM (Eyudio)**. It features dual-core FreeRTOS task scheduling, direct 400x300 VGA display output, multi-source input drivers (Native USB OTG Host, CH375 UART USB Host, NimBLE BLE Gamepad, Virtual Keyboard), the `EsDOS` command shell, the `EyuScript Turbo v3` scripting engine, and a clean modular application registry (`AppRegistry`).
+**EyudiOS ESP32-S3 Edition v2.0** is a high-performance open-source operating system kernel and runtime environment created by **Eyüp SAĞLAM (Eyudio)**. It features dual-core FreeRTOS task scheduling, direct 400x300 VGA display output, multi-source input drivers (Native USB OTG Host, CH375 / USB Host Shield 2.0, NimBLE BLE Gamepads, PlayStation & Xbox Controllers, Virtual Keyboard), the `EsDOS` command shell, the `EyuScript Turbo v3` scripting engine, and a clean modular application registry (`AppRegistry`).
+
+> ⚡ **Fast Installation without Compiling:** You can flash pre-compiled EyudiOS firmware binaries directly from your web browser using the official [EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher) tool!
 
 ---
 
@@ -22,12 +25,12 @@
 
 - 🖥️ **VGA & Display Engine:** Bitluni VGA integration providing 400x300 double-buffered graphics interface.
 - ⌨️ **Multi-Source Input Architecture:**
-  - **Native ESP32-S3 USB OTG Host:** Direct USB HID Keyboard & Mouse support.
-  - **CH375 Hardware USB Co-processor:** Secondary UART USB Host interface (GPIO 3 RX / GPIO 46 TX).
-  - **NimBLE Bluetooth/BLE Engine:** Wireless Bluetooth Gamepad, Keyboard, and Controller driver support.
-  - **PSX & Gamepad Drivers:** External Leonardo / PSX Controller interface.
-  - **Graphical Virtual Keyboard (VKB):** On-screen mouse/touch driven interactive keyboard.
-  - **GPIO ISR Interrupt Bridge:** Hardware interrupt button handling.
+  - **Native ESP32-S3 USB OTG Host Driver:** Direct USB HID Keyboard (8-byte report) & USB HID Mouse (delta X/Y, clicks) via ESP32-S3 D+/D- pins.
+  - **CH375 / USB Host Shield 2.0 Hardware USB Driver (UART):** Hardware keyboard & mouse support via secondary coprocessor (Arduino Leonardo / Uno) over serial (GPIO 3 RX / GPIO 46 TX).
+  - **NimBLE Bluetooth / BLE Gamepad & Controller Driver:** Wireless Bluetooth Gamepad, Controllers, and Keyboard support via NimBLE-Arduino.
+  - **PlayStation 2/3/4, Xbox Controllers & External BT Dongle Support:** Complete game controller and Bluetooth device support via USB Host Shield 2.0 and Arduino Leonardo / Uno coprocessor combination.
+  - **Graphical Virtual Keyboard (VKB):** Interactive on-screen mouse/touch driven keyboard.
+  - **GPIO Interrupt (ISR) Bridge:** Hardware button interrupt handling with FreeRTOS `vTaskNotifyGiveFromISR`.
 - ⚡ **Dual-Core Concurrency (FreeRTOS):**
   - **Core 1:** Foreground UI, windowing system, desktop render loop, and foreground script execution.
   - **Core 0:** Background script tasks (`bgScriptTask[0..2]`), FreeRTOS IPC message queues, and non-blocking I/O.
@@ -46,15 +49,24 @@
 
 ---
 
+## ⚡ One-Click Web Flasher ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
+
+If you want to install EyudiOS on your ESP32-S3 board without setting up a PlatformIO build environment:
+1. Visit the [EyudiOS Flasher Repository](https://github.com/6eyp6/EyudiOS-Flasher).
+2. Connect your ESP32-S3 board to your PC via USB.
+3. Launch EyudiOS Flasher to automatically flash firmware binaries and partition schemes!
+
+---
+
 ## 🔌 Hardware Requirements & Pinout
 
 ### Hardware:
 * **MCU:** ESP32-S3 (YD-ESP32-S3 / ESP32-S3-DevKitC-1)
 * **RAM/Flash:** 8MB / 16MB OPI PSRAM + 16MB Flash
 * **Input Devices:**
-  - USB HID Keyboard & Mouse (Native USB D+/D- or CH375 Module)
-  - Bluetooth BLE Gamepad / Wireless Controller
-  - PSX Controller (Leonardo Driver)
+  - USB HID Keyboard & Mouse (Native USB D+/D- or CH375 / USB Host Shield 2.0)
+  - PlayStation 2 / 3 / 4, Xbox Controllers & Bluetooth Dongles (Leonardo / Uno coprocessor)
+  - Bluetooth BLE Wireless Gamepad & Keyboard
 * **Storage:** MicroSD Card Module (SPI Mode)
 
 ### Pin Mapping (`SystemConfig.h`):
@@ -82,7 +94,7 @@
 1. Install Visual Studio Code and the [PlatformIO IDE](https://platformio.org/) extension.
 2. Clone or download the repository:
    ```bash
-   git clone https://github.com/6eyp6/EyudiOS-ESP32S3.git
+   git clone https://github.com/6eyp6/EyudiOS-ESP32-S3.git
    ```
 3. Open the project folder in VS Code.
 4. Verify `platformio.ini` settings for your ESP32-S3 board (16MB Flash + OPI PSRAM).

@@ -2,6 +2,7 @@
 
 [![Lang Türkçe](https://img.shields.io/badge/Lang-T%C3%BCrk%C3%A7e-red.svg)](architecture.md)
 [![Lang English](https://img.shields.io/badge/Lang-English-blue.svg)](../architecture.md)
+[![EyudiOS Flasher](https://img.shields.io/badge/Web%20Flasher-EyudiOS%20Flasher-purple.svg)](https://github.com/6eyp6/EyudiOS-Flasher)
 
 > EyudiOS S3 Edition v2.0 — Çekirdek (Kernel), Girdi (Input) Mimarisi, Bellek (PSRAM) ve Task Yönetimi
 
@@ -52,12 +53,12 @@ EyudiOS v2.0 donanım ve yazılım seviyesinde 6 farklı girdi katmanını deste
 
 1. **Yerleşik ESP32-S3 USB OTG Host Sürücüsü:**
    - ESP32-S3 çipinin dahili USB D+/D- pinleri üzerinden doğrudan USB HID Klavye (8-byte rapor) ve USB HID Fare (delta X/Y, sol/sağ tık) desteği.
-2. **CH375 Donanımsal USB Sürücüsü (UART):**
-   - İkincil coprocessor olarak çalışan CH375 modülü üzerinden seri iletişimle (GPIO 3 RX / GPIO 46 TX) donanımsal klavye ve fare desteği.
+2. **CH375 / USB Host Shield 2.0 Donanımsal USB Sürücüsü (UART):**
+   - İkincil coprocessor olarak çalışan Arduino Leonardo / Uno üzerinden seri iletişimle (GPIO 3 RX / GPIO 46 TX) donanımsal klavye ve fare desteği.
 3. **NimBLE Bluetooth / BLE Oyun Kolu & Klavye Sürücüsü:**
    - NimBLE-Arduino kütüphanesi ile kablosuz Bluetooth Gamepad, Oyun Kolları ve Kablosuz Klavyelerden gelen tuş girdilerini işleme.
-4. **Leonardo / PSX Controller Sürücüsü:**
-   - Harici Leonardo ve PSX gamepad sürücü entegrasyonu.
+4. **PlayStation 2/3/4, Xbox kumandaları ve harici Bluetooth USB sürücüsü desteği:**
+   - USB Host Shield 2.0 ve Arduino Leonardo / Uno ikilisiyle tüm oyun kollarına ve bluetooth cihazlarına destek.
 5. **Grafik Sanal Ekran Klavyesi (VKB):**
    - Ekran üzerinde fare ve dokunmatik ile kullanılabilen grafik klavye.
 6. **GPIO Kesme (ISR) Köprüsü:**
@@ -105,6 +106,12 @@ typedef struct {
 ```
 
 Bu yapı sayesinde bağımsız veya private modüller `registerExternalApps()` zayıf bağlama fonksiyonu ile sisteme enjekte edilebilir.
+
+---
+
+## ⚡ Web Flasher Aracı ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
+
+Hazır derlenmiş ikili dosyaları ve sistem bölümlerini web ortamından tek tıkla ESP32-S3 kartlarına yüklemek için geliştirilen açık kaynaklı masaüstü/web yükleme aracıdır.
 
 ---
 

@@ -2,6 +2,7 @@
 
 [![Lang English](https://img.shields.io/badge/Lang-English-blue.svg)](architecture.md)
 [![Lang Türkçe](https://img.shields.io/badge/Lang-T%C3%BCrk%C3%A7e-red.svg)](tr/architecture.md)
+[![EyudiOS Flasher](https://img.shields.io/badge/Web%20Flasher-EyudiOS%20Flasher-purple.svg)](https://github.com/6eyp6/EyudiOS-Flasher)
 
 > EyudiOS S3 Edition v2.0 — Kernel, Input Architecture, Memory (PSRAM), Task Management & Hardware Drivers
 
@@ -52,12 +53,12 @@ EyudiOS v2.0 supports 6 distinct hardware & software input layers:
 
 1. **Native ESP32-S3 USB OTG Host Driver:**
    - Direct USB HID Keyboard (8-byte reports) & USB HID Mouse (delta X/Y, clicks) via ESP32-S3 USB D+/D- pins.
-2. **CH375 Hardware USB Coprocessor Driver (UART):**
-   - Secondary hardware USB Host interface via UART (GPIO 3 RX / GPIO 46 TX).
-3. **NimBLE Bluetooth / BLE Gamepad & Controller Engine:**
-   - Wireless Bluetooth Gamepad, Controllers, and Keyboards via NimBLE-Arduino.
-4. **Leonardo / PSX Controller Driver:**
-   - External Leonardo USB & PSX controller driver integration.
+2. **CH375 / USB Host Shield 2.0 Hardware USB Driver (UART):**
+   - Hardware keyboard & mouse support via secondary coprocessor (Arduino Leonardo / Uno) over serial (GPIO 3 RX / GPIO 46 TX).
+3. **NimBLE Bluetooth / BLE Gamepad & Controller Driver:**
+   - Wireless Bluetooth Gamepad, Controllers, and Keyboard support via NimBLE-Arduino.
+4. **PlayStation 2/3/4, Xbox Controllers & External BT Dongle Support:**
+   - Complete game controller and Bluetooth device support via USB Host Shield 2.0 and Arduino Leonardo / Uno coprocessor combination.
 5. **Graphical Virtual Keyboard (VKB):**
    - Interactive on-screen mouse/touch driven keyboard.
 6. **GPIO Interrupt (ISR) Bridge:**
@@ -105,6 +106,12 @@ typedef struct {
 ```
 
 This clean structure allows external/private modules to be injected into the system via the `registerExternalApps()` weak symbol hook.
+
+---
+
+## ⚡ Web Flasher Tool ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
+
+Official web/GUI flasher tool designed for flashing pre-compiled EyudiOS firmware binaries directly to ESP32-S3 boards without compiling code.
 
 ---
 
