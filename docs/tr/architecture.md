@@ -57,9 +57,9 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 
 ### 🕹️ Arduino Leonardo Coprocessor Kurulum & Haberleşme Mimarisi
 
-EyudiOS v2.0, harici USB cihazları (PS2/PS3/PS4/Xbox kumandaları ve Bluetooth Dongle) yönetmek için Arduino Leonardo (ATmega32u4) işlemcisini yardımcı sürücü olarak kullanır:
+EyudiOS v2.0, harici USB cihazları (PS2/PS3/PS4/Xbox kumandaları ve Bluetooth Dongle) yönetmek için Arduino Leonardo/UNO üzerinde bulunan işlemcisini yardımcı sürücü olarak kullanır:
 
-* **Sürücü Sketch'leri:**
+* **Sürücü Dosyaları:**
   - `leonardo_drivers/usb psx/usb_controller_driver/usb_controller_driver.ino` (Kablolu USB & PS2 kollar)
   - `leonardo_drivers/bluetooth/bluetooth_dongle_driver.ino` (USB Bluetooth Dongle ile kablosuz kollar)
 * **Bellek Optimizasyonu:** Leonardo'nun 28KB kısıtlı hafızası nedeniyle `.ino` içindeki `#define SUPPORT_PS4`, `#define SUPPORT_PS2` bayrakları ile sadece kullanılan kollar aktifleştirilir.
