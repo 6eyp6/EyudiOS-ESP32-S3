@@ -17,8 +17,8 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 │                                                                                │
 │   loop() — Ana UI Döngüsü                              Priority: 1             │
 │   ├── processUSBInput()          → USB Klavye & Fare olayları (CH375/Native)   │
-│   ├── processBLEInput()          → NimBLE Gamepad & Kablosuz Klavye okuma       │
-│   ├── IPC mesaj işle             → Arka plandan gelen Queue (16 slot) paketleri  │
+│   ├── processBLEInput()          → NimBLE Gamepad & Kablosuz Klavye okuma      │
+│   ├── IPC mesaj işle             → Arka plandan gelen Queue (16 slot) paketleri│
 │   └── Render (systemMutex korumalı)                                            │
 │       ├── runningScript → ESC overlay ve ön plan ScriptEngine çizimi           │
 │       ├── showFileManager  → drawFileManager()                                 │
@@ -26,7 +26,7 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 │       ├── showEsdos        → drawEsdos()                                       │
 │       └── Desktop/Windows  → AppRegistry + renderDesktop()                     │
 │                                                                                │
-│   runEyuScriptTask()             Foreground Script    Priority: 1 (Core 1)    │
+│   runEyuScriptTask()             Foreground Script    Priority: 1 (Core 1)     │
 │   └── Framebuffer: systemMutex ile korumalı çizim                              │
 │                                                                                │
 └────────────────────────────────────────────────────────────────────────────────┘
@@ -37,10 +37,10 @@ EyudiOS v2.0, ESP32-S3'ün çift çekirdekli (Xtensa LX7 @ 240MHz) donanım mima
 │   bgScriptTask[1]               BG Script Slot 1      Priority: 0              │
 │   bgScriptTask[2]               BG Script Slot 2      Priority: 0              │
 │                                                                                │
-│   ✓ Tüm BG task'lar vTaskDelay(1) ile kooperatif yield gerçekleştirir          │
-│   ✓ Framebuffer / Çizim ekranına doğrudan erişim YOKTUR                        │
-│   ✓ SD kart erişimi sdMutex ile korumalıdır                                     │
-│   ✓ IPC komutu ile FreeRTOS Queue üzerinden ön plana veri taşır                │
+│     Tüm BG task'lar vTaskDelay(1) ile kooperatif yield gerçekleştirir          │
+│     Framebuffer / Çizim ekranına doğrudan erişim YOKTUR                        │
+│    SD kart erişimi sdMutex ile korumalıdır                                     │
+│     IPC komutu ile FreeRTOS Queue üzerinden ön plana veri taşır                │
 │                                                                                │
 └────────────────────────────────────────────────────────────────────────────────┘
 ```
