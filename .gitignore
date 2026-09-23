@@ -1,0 +1,23 @@
+# PlatformIO & IDE Build Files
+.pio
+.vscode/.browse.c_cpp.db*
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/ipch
+
+# Temporary & Build Outputs
+build_output.txt
+src/Untitled-1.txt
+*.log
+*.tmp
+
+# Proprietary Eyudio Application Modules (Private / Local Folder Only)
+Eyudio-Private/
+include/EyudioApps.h
+src/EyudioApps.cpp
+include/EyudioCrypto.h
+src/EyudioCrypto.cpp
+include/EyudioFirebase.h
+src/EyudioFirebase.cpp
+include/EyudioWiFiSync.h
+src/EyudioWiFiSync.cpp
