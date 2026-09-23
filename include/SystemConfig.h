@@ -49,6 +49,7 @@ const int vsyncPin = 15;
 
 // Diğer Donanımlar (Sağ Taraf)
 #define VBUS_ENABLE_PIN 21
+#define AUDIO_PDM_PIN   18
 #define NEOPIXEL_PIN    48
 #define NEOPIXEL_COUNT  1
 

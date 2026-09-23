@@ -66,25 +66,30 @@ PlatformIO veya kod derleme ile uğraşmadan EyudiOS'u yüklemek isterseniz:
   - USB HID Klavye ve Fare (Yerleşik USB D+/D- veya CH375 / USB Host Shield 2.0)
   - PlayStation 2 / 3 / 4, Xbox Kumandaları & Bluetooth Dongle (Leonardo / Uno Coprocessor)
   - Bluetooth BLE Kablosuz Oyun Kolu & Klavye
-* **Depolama:** MicroSD Kart Modülü (SPI Modu)
+* **Depolama:** MicroSD Kart Modülü (SPI Modu) & CH375B USB Disk (UART)
 
-### Pin Haritası (`SystemConfig.h`):
+### 🔌 EyudiOS S3 Tam Pin Bağlantı Listesi
 
-| Bileşen | Sinyal | ESP32-S3 Pin |
-|:---|:---|:---|
-| **VGA Çıktısı** | RED | GPIO 4 |
-| | GREEN | GPIO 5 |
-| | BLUE | GPIO 6 |
-| | HSYNC | GPIO 7 |
-| | VSYNC | GPIO 15 |
-| **SD Kart (SPI)** | CS | GPIO 10 |
-| | SCK | GPIO 12 |
-| | MISO | GPIO 13 |
-| | MOSI | GPIO 11 |
-| **CH375 USB Host** | RX | GPIO 3 |
-| | TX | GPIO 46 |
-| **Gelişmiş** | VBUS Enable | GPIO 21 |
-| | NeoPixel LED | GPIO 48 |
+| Donanım / Birim | Pin Adı / İşlevi | ESP32-S3 GPIO Numarası | Açıklama |
+| :--- | :--- | :--- | :--- |
+| **VGA Monitör Çıkışı** | Red (Kırmızı) | **GPIO 4** | VGA Analog Kırmızı Sinyali |
+| | Green (Yeşil) | **GPIO 5** | VGA Analog Yeşil Sinyali |
+| | Blue (Mavi) | **GPIO 6** | VGA Analog Mavi Sinyali |
+| | H-Sync | **GPIO 7** | Yatay Senkronizasyon Sinyali |
+| | V-Sync | **GPIO 15** | Dikey Senkronizasyon Sinyali |
+| **Micro SD Kart (SPI)** | CS (Chip Select) | **GPIO 10** | SD Kart Seçim Sinyali |
+| | MOSI (Data In) | **GPIO 11** | SPI Master Out Slave In |
+| | SCK (Saat/Clock) | **GPIO 12** | SPI Saat Sinyali |
+| | MISO (Data Out) | **GPIO 13** | SPI Master In Slave Out |
+| **CH375B Depolama (UART)** | CH375B TX $\rightarrow$ ESP RX | **GPIO 1** | USB Disk Dosya Okuma |
+| | CH375B RX $\leftarrow$ ESP TX | **GPIO 2** | USB Disk Dosya Yazma |
+| **USB Host Klavye/Mouse (Harici)** | Serial1 RX (ESP RX) | **GPIO 3** | Harici USB Host MCU (TX) Girişi (Leonardo RX:8, TX:7) |
+| | Serial1 TX (ESP TX) | **GPIO 46** | Harici USB Host MCU (RX) Çıkışı |
+| **USB Host Klavye/Mouse (Native)** | USB D- (Data -) | **GPIO 19** | ESP32-S3 Dahili USB Host Sinyali |
+| | USB D+ (Data +) | **GPIO 20** | ESP32-S3 Dahili USB Host Sinyali |
+| **Güç Yönetimi** | VBUS Enable | **GPIO 21** | USB Portuna 5V Güç Sağlama Anahtarı |
+| **Durum LED** | NeoPixel LED | **GPIO 48** | WS2812 Adreslenebilir Durum LED'i |
+| **Ses Birimi** | PDM Audio / Buzzer | **GPIO 18** | Ses Çıkışı (Buzör Sinyali) |
 
 ---
 

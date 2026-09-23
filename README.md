@@ -48,12 +48,12 @@
 
 ---
 
-## ⚡ One-Click Web Flasher ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
+## ⚡ Quick Installation ([EyudiOS Flasher](https://github.com/6eyp6/EyudiOS-Flasher))
 
 If you want to install EyudiOS on your ESP32-S3 board without setting up a PlatformIO build environment:
 1. Visit the [EyudiOS Flasher Repository](https://github.com/6eyp6/EyudiOS-Flasher).
 2. Connect your ESP32-S3 board to your PC via USB.
-3. Launch EyudiOS Flasher to automatically flash firmware binaries and partition schemes!
+3. Launch EyudiOS Flasher to automatically flash pre-compiled firmware binaries and partition schemes in seconds!
 
 ---
 
@@ -66,25 +66,30 @@ If you want to install EyudiOS on your ESP32-S3 board without setting up a Platf
   - USB HID Keyboard & Mouse (Native USB D+/D- or CH375 / USB Host Shield 2.0)
   - PlayStation 2 / 3 / 4, Xbox Controllers & Bluetooth Dongles (Leonardo / Uno coprocessor)
   - Bluetooth BLE Wireless Gamepad & Keyboard
-* **Storage:** MicroSD Card Module (SPI Mode)
+* **Storage:** MicroSD Card Module (SPI Mode) & CH375B USB Disk (UART)
 
-### Pin Mapping (`SystemConfig.h`):
+### 🔌 EyudiOS S3 Complete Pinout Table
 
-| Component | Signal | ESP32-S3 Pin |
-|:---|:---|:---|
-| **VGA Output** | RED | GPIO 4 |
-| | GREEN | GPIO 5 |
-| | BLUE | GPIO 6 |
-| | HSYNC | GPIO 7 |
-| | VSYNC | GPIO 15 |
-| **SD Card (SPI)** | CS | GPIO 10 |
-| | SCK | GPIO 12 |
-| | MISO | GPIO 13 |
-| | MOSI | GPIO 11 |
-| **CH375 USB Host** | RX | GPIO 3 |
-| | TX | GPIO 46 |
-| **Peripherals** | VBUS Enable | GPIO 21 |
-| | NeoPixel LED | GPIO 48 |
+| Hardware / Unit | Pin Name / Function | ESP32-S3 GPIO Number | Description |
+| :--- | :--- | :--- | :--- |
+| **VGA Monitor Output** | Red | **GPIO 4** | VGA Analog Red Signal |
+| | Green | **GPIO 5** | VGA Analog Green Signal |
+| | Blue | **GPIO 6** | VGA Analog Blue Signal |
+| | H-Sync | **GPIO 7** | Horizontal Synchronization Signal |
+| | V-Sync | **GPIO 15** | Vertical Synchronization Signal |
+| **Micro SD Card (SPI)** | CS (Chip Select) | **GPIO 10** | SD Card Select Signal |
+| | MOSI (Data In) | **GPIO 11** | SPI Master Out Slave In |
+| | SCK (Clock) | **GPIO 12** | SPI Clock Signal |
+| | MISO (Data Out) | **GPIO 13** | SPI Master In Slave Out |
+| **CH375B Storage (UART)** | CH375B TX $\rightarrow$ ESP RX | **GPIO 1** | USB Disk Read Signal |
+| | CH375B RX $\leftarrow$ ESP TX | **GPIO 2** | USB Disk Write Signal |
+| **USB Host Keyboard/Mouse (External)** | Serial1 RX (ESP RX) | **GPIO 3** | External USB Host MCU (TX) Input (Leonardo RX:8, TX:7) |
+| | Serial1 TX (ESP TX) | **GPIO 46** | External USB Host MCU (RX) Output |
+| **USB Host Keyboard/Mouse (Native)** | USB D- (Data -) | **GPIO 19** | ESP32-S3 Native USB Host Signal |
+| | USB D+ (Data +) | **GPIO 20** | ESP32-S3 Native USB Host Signal |
+| **Power Management** | VBUS Enable | **GPIO 21** | 5V Power Switch for USB Port |
+| **Status LED** | NeoPixel LED | **GPIO 48** | WS2812 Addressable Status LED |
+| **Audio Unit** | PDM Audio / Buzzer | **GPIO 18** | Audio Output / Buzzer Signal |
 
 ---
 
